@@ -19,10 +19,10 @@ app.run = function(fileName, cb) {
 	fileReader.readInputFile(fileName, function(err, fileData) {
 
 		// parse data
-		myParser.parseArgs(fileData, function(err, instructionList) {
+		myParser.parseArgs(fileData, function(err, cmdArr) {
 
 			// robot action
-			robot = robot.runInstructions(instructionList);
+			robot = robot.runInstructions(cmdArr);
 
 			// print result with robot
 			cb(null, robot);
