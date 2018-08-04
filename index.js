@@ -13,7 +13,7 @@ var robot = new Robot();
 
 
 // top with func param 
-app.run = function(fileName, cbPrint) {
+app.run = function(fileName, cb) {
 
 	// read file
 	fileReader.readInputFile(fileName, function(err, fileData) {
@@ -24,8 +24,8 @@ app.run = function(fileName, cbPrint) {
 			// robot action
 			robot = robot.runInstructions(instructionList);
 
-			// print result
-			cbPrint(null, robot);
+			// print result with robot
+			cb(null, robot);
 		});
 
 	});

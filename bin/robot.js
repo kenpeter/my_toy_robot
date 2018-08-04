@@ -2,6 +2,7 @@
 
 /* env node */
 var app = require('../index.js');
+global.DEBUG = true;
 
 // 0, node
 // 1, cmd
