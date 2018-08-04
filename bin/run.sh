@@ -1,3 +1,3 @@
 #!/bin/sh
 
-./robot.js ../data/test4.txt
+./robot.js ../data/test6.txt
