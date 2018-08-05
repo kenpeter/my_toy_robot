@@ -3,32 +3,39 @@ var FileReader = require('./lib/FileReader');
 var MyParser = require('./lib/MyParser');
 var Robot = require('./lib/Robot');
 
-// total obj
-var app = {};
-
 // func, can use new
 var fileReader = new FileReader();
 var myParser = new MyParser();
 var robot = new Robot();
 
 
-// top with func param 
-app.run = function(fileName, cb) {
+// total obj
+var app = function() {
+
+};
+
+
+app.prototype.print = function(err, robot) {
+	// error pattern
+  if(err) {
+    console.log(err);
+    return false;
+  }
+
+  if(!robot.isPlaced) {
+    console.log('robot is not placed on the table');
+    return false;
+  }
+}
+
+
+app.prototype.run = async function(fileName) {
 
 	// read file
-	fileReader.readInputFile(fileName, function(err, fileData) {
-
-		// parse data
-		myParser.parseArgs(fileData, function(err, cmdArr) {
-
-			// robot action
-			robot = robot.runInstructions(cmdArr);
-
-			// print result with robot
-			cb(null, robot);
-		});
-
-	});
+  var content = await fileReader.readInputFile(fileName);
+	var cmdArr = myParser.parseStrData(content);
+  robot = robot.runInstructions(cmdArr);
+  this.print(null, robot);
 
 };
 
